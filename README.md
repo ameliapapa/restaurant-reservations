@@ -11,6 +11,11 @@ Full-stack reservation experience for Fresh Garden. Guests can pick a date/time,
 - Front-end: `npm install` then `npm run dev` at the repo root.
 - Backend/emulator: `npm --prefix functions install`, then follow `BACKEND_SETUP.md` to start the Firebase emulators and functions.
 
+### Admin login (emulator)
+- Start emulators: `cd functions && firebase emulators:start --only auth,functions,firestore`
+- Seed or sign in an admin user, then ensure their UID exists in the Firestore emulator at `admin-users/{uid}` with `{ role: "admin" }` (see `test-admin-flow.js` for a scripted example).
+- Open `/admin/login` in the web app and log in with that admin account (defaults when seeding via script: `admin@freshgarden.com` / `admin123456`).
+
 ## Current status
 - Latest change: `checkAndReserveSlot` now runs the availability check and reservation creation inside a Firestore transaction with a slot-level lock document, preventing double-booking under concurrent requests.
   
